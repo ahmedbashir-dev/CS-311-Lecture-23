@@ -26,6 +26,8 @@ public class Main extends Application {
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100,1);
         spinner.setValueFactory(valueFactory);
 
+        ProgressBar progressBar = new ProgressBar(0);
+//        progressBar.setProgress(0.5);
         spinner.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observableValue, Integer oldVal, Integer newVal) {
@@ -35,10 +37,11 @@ public class Main extends Application {
                 else{
                     completedCb.setSelected(false);
                 }
+                progressBar.setProgress(1.00*newVal/100);
             }
         });
 
-        FlowPane fp = new FlowPane(heightLb, widthLb, tf,tf2,spinner,completedCb);
+        FlowPane fp = new FlowPane(heightLb, widthLb, tf,tf2,spinner,completedCb,progressBar);
         tf.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldVal, Boolean newVal) {
